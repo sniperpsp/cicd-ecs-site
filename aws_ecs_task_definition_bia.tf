@@ -14,8 +14,8 @@ resource "aws_ecs_task_definition" "bia-web" {
           hostPort      = 0
         }
       ]
-      cpu               = 256
-      memoryReservation = 200
+      cpu               = 512
+      memoryReservation = 400
       environment = [
         {
           name  = "DB_PORT"
@@ -57,8 +57,8 @@ resource "aws_ecs_task_definition" "bia-web" {
           hostPort      = 0
         }
       ]
-      cpu               = 256
-      memoryReservation = 200
+      cpu               = 512
+      memoryReservation = 400
       environment = [
         {
           name  = "POSTGRES_USER"
