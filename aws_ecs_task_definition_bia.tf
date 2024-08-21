@@ -6,11 +6,11 @@ resource "aws_ecs_task_definition" "bia-web" {
   container_definitions = jsonencode([
     {
       name      = "todo"
-      image     = "${aws_ecr_repository.todo.repository_url}:latest"
+      image     = "${var.ecr}/node-todo-app:latest"
       essential = true
       portMappings = [
         {
-          containerPort = 8080
+          containerPort = 3000
           hostPort      = 0
         }
       ]
@@ -23,7 +23,7 @@ resource "aws_ecs_task_definition" "bia-web" {
         },
         {
           name  = "DB_HOST"
-          value = ""
+          value = "db"
         },
         {
           name  = "DB_SECRET_NAME"
@@ -41,9 +41,44 @@ resource "aws_ecs_task_definition" "bia-web" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = "/ecs/bia-web"  // Adicionando awslogs-group
           awslogs-region        = "us-east-1"
+          awslogs-group         = "/ecs/bia-web"
           awslogs-stream-prefix = "bia"
+        }
+      }
+    },
+    {
+      name      = "db"
+      image     = "${var.ecr}/postgres-db:latest"
+      essential = true
+      portMappings = [
+        {
+          containerPort = 5432
+          hostPort      = 0
+        }
+      ]
+      cpu               = 512
+      memoryReservation = 200
+      environment = [
+        {
+          name  = "POSTGRES_USER"
+          value = "postgres"
+        },
+        {
+          name  = "POSTGRES_PASSWORD"
+          value = "postgres"
+        },
+        {
+          name  = "POSTGRES_DB"
+          value = "postgres"
+        }
+      ]
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-region        = "us-east-1"
+          awslogs-group         = "/ecs/bia-web"
+          awslogs-stream-prefix = "db"
         }
       }
     }
@@ -53,5 +88,4 @@ resource "aws_ecs_task_definition" "bia-web" {
     cpu_architecture        = "X86_64"
     operating_system_family = "LINUX"
   }
-
 }

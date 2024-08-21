@@ -40,3 +40,8 @@ variable "sg1" {
   
 }
 
+variable "ecr" {
+  default = "730335588602.dkr.ecr.us-east-1.amazonaws.com"
+  description = "Nome do SG que vai ser criado" 
+}
+

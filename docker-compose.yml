@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+  db:
+    image: banco-de-dados
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - /d/TreinamentoCodigos/to-do-Docker/agenda/node-todo-app/volumedb:/var/lib/postgresql/data
+
+  app:
+    image: node-todo-app
+    ports:
+      - "80:3000"
+    depends_on:
+      - db
+    environment:
+      PGHOST: db
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: postgres
+      PGPORT: 5432
