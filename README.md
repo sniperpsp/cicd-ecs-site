@@ -70,6 +70,22 @@ O workflow do GitHub Actions (`.github/workflows/terraform.yml`) automatiza a ex
    terraform apply
    ```
 
+## Inputs
+
+| Nome           | Descrição                          | Tipo   | Default           | Obrigatório |
+| -------------- | ---------------------------------- | ------ | ----------------- | ----------- |
+| `tag_name`     | Nome da instância                  | string | `"CICD-todo"`     | não         |
+| `tag_app`      | Nome da aplicação                  | string | `"CICD-todo"`     | não         |
+| `tag_servico`  | Nome do serviço                    | string | `"CICD-todo"`     | não         |
+| `ami`          | ID da AMI que será usada           | string | `"ami-0d91c802561cd4176"` | não |
+| `instance_type_ec2` | Tipo da instância usada       | string | `"t3.micro"`      | não         |
+| `meu_ip`       | Meu endereço IP atual              | string | `"45.228.245.0"`  | não         |
+| `sg1`          | Nome do Security Group que será criado | string | `"SG-Terraform"` | não         |
+
+## Outputs
+
+Nenhum output definido.
+
 ## Contribuição
 
 Sinta-se à vontade para abrir issues e pull requests para melhorias e correções.
