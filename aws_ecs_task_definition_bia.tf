@@ -14,8 +14,8 @@ resource "aws_ecs_task_definition" "bia-web" {
           hostPort      = 0
         }
       ]
-      cpu               = 1024
-      memoryReservation = 400
+      cpu               = 256
+      memoryReservation = 200
       environment = [
         {
           name  = "DB_PORT"
@@ -57,7 +57,7 @@ resource "aws_ecs_task_definition" "bia-web" {
           hostPort      = 0
         }
       ]
-      cpu               = 512
+      cpu               = 256
       memoryReservation = 200
       environment = [
         {
