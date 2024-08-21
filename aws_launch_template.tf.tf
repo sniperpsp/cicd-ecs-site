@@ -5,7 +5,7 @@ data "aws_ssm_parameter" "ecs_optimized_ami" {
 resource "aws_launch_template" "ecs_ec2" {
   name_prefix   = "cluster-bia-web-"
   image_id      = data.aws_ssm_parameter.ecs_optimized_ami.value
-  instance_type = "t3.micro"
+  instance_type = "t3.medium"
 
   network_interfaces {
     associate_public_ip_address = true
