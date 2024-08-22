@@ -46,42 +46,42 @@ resource "aws_ecs_task_definition" "bia-web" {
           awslogs-stream-prefix = "bia"
         }
       }
-    },
-    {
-      name      = "db"
-      image     = "${var.ecr}/postgres-db:latest"
-      essential = true
-      portMappings = [
-        {
-          containerPort = 5432
-          hostPort      = 5432
-        }
-      ]
-      cpu               = 1
-      memoryReservation = 1000
-      environment = [
-        {
-          name  = "POSTGRES_USER"
-          value = "postgres"
-        },
-        {
-          name  = "POSTGRES_PASSWORD"
-          value = "postgres"
-        },
-        {
-          name  = "POSTGRES_DB"
-          value = "postgres"
-        }
-      ]
-      logConfiguration = {
-        logDriver = "awslogs"
-        options = {
-          awslogs-region        = "us-east-1"
-          awslogs-group         = "/ecs/bia-web"
-          awslogs-stream-prefix = "db"
-        }
-      }
     }
+    # {
+    #   name      = "db"
+    #   image     = "${var.ecr}/postgres-db:latest"
+    #   essential = true
+    #   portMappings = [
+    #     {
+    #       containerPort = 5432
+    #       hostPort      = 5432
+    #     }
+    #   ]
+    #   cpu               = 1
+    #   memoryReservation = 1000
+    #   environment = [
+    #     {
+    #       name  = "POSTGRES_USER"
+    #       value = "postgres"
+    #     },
+    #     {
+    #       name  = "POSTGRES_PASSWORD"
+    #       value = "postgres"
+    #     },
+    #     {
+    #       name  = "POSTGRES_DB"
+    #       value = "postgres"
+    #     }
+    #   ]
+    #   logConfiguration = {
+    #     logDriver = "awslogs"
+    #     options = {
+    #       awslogs-region        = "us-east-1"
+    #       awslogs-group         = "/ecs/bia-web"
+    #       awslogs-stream-prefix = "db"
+    #     }
+    #   }
+    # }
   ])
 
   runtime_platform {
