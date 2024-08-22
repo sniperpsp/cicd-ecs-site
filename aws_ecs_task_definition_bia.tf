@@ -54,7 +54,7 @@ resource "aws_ecs_task_definition" "bia-web" {
       portMappings = [
         {
           containerPort = 5432
-          hostPort      = 0
+          hostPort      = 5432
         }
       ]
       cpu               = 1
