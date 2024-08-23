@@ -1,4 +1,5 @@
 #!/bin/bash
+#teste
 
 # Configurações
 HOSTED_ZONE_ID="Z09315943W3HUYZ1CG61C"
