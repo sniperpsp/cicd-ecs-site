@@ -1,4 +1,7 @@
 variable "aws_account_id" {}
+variable "ecr_uri" {}
+
+data "aws_caller_identity" "current" {}
 
 resource "aws_ecs_task_definition" "task_todo" {
   family                   = "task-todo"
