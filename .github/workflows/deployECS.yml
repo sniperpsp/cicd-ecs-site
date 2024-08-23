@@ -38,6 +38,9 @@ jobs:
 
     - name: Apply Terraform
       run: terraform apply -auto-approve
+      env:
+        AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        ECR_URI: ${{ secrets.ECR_URI }}
 
   build-and-push:
     name: Build and Push Docker Images
@@ -78,14 +81,14 @@ jobs:
         push: true
         tags: ${{ secrets.ECR_URI }}/node-todo:latest
 
-    # - name: Build and push db image
-    #   id: build-db
-    #   uses: docker/build-push-action@v2
-    #   with:
-    #     context: .
-    #     file: ./Dockerfile-postgres
-    #     push: true
-    #     tags: ${{ secrets.ECR_URI }}/db:latest
+    - name: Build and push db image
+      id: build-db
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile-postgres
+        push: true
+        tags: ${{ secrets.ECR_URI }}/banco-de-dados:latest
 
   deploy:
     name: Deploy to ECS
@@ -108,6 +111,9 @@ jobs:
       run: |
         terraform init
         terraform apply -auto-approve
+      env:
+        AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        ECR_URI: ${{ secrets.ECR_URI }}
 
   destroy:
     name: Destroy Infrastructure
@@ -129,3 +135,6 @@ jobs:
       run: |
         terraform init
         terraform destroy -auto-approve
+      env:
+        AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        ECR_URI: ${{ secrets.ECR_URI }}
