@@ -37,10 +37,7 @@ jobs:
       run: terraform init
 
     - name: Apply Terraform
-      run: terraform apply -auto-approve
-      env:
-        AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-        ECR_URI: ${{ secrets.ECR_URI }}
+      run: terraform apply -auto-approve -var "aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}" -var "ecr_uri=${{ secrets.ECR_URI }}"
 
   build-and-push:
     name: Build and Push Docker Images
@@ -110,10 +107,7 @@ jobs:
     - name: Deploy to ECS
       run: |
         terraform init
-        terraform apply -auto-approve
-      env:
-        AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-        ECR_URI: ${{ secrets.ECR_URI }}
+        terraform apply -auto-approve -var "aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}" -var "ecr_uri=${{ secrets.ECR_URI }}"
 
   destroy:
     name: Destroy Infrastructure
@@ -134,7 +128,4 @@ jobs:
     - name: Destroy ECS and ECR
       run: |
         terraform init
-        terraform destroy -auto-approve
-      env:
-        AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-        ECR_URI: ${{ secrets.ECR_URI }}
+        terraform destroy -auto-approve -var "aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}" -var "ecr_uri=${{ secrets.ECR_URI }}"
