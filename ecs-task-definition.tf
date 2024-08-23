@@ -58,7 +58,7 @@ resource "aws_ecs_task_definition" "task_todo" {
 }
 
 resource "aws_ecs_service" "task_todo" {
-  name            = "service-todo"
+  name            = "service-todo-${random_id.suffix.hex}"
   cluster         = aws_ecs_cluster.cluster_todo.id
   task_definition = aws_ecs_task_definition.task_todo.arn
   desired_count   = 1
@@ -79,4 +79,8 @@ resource "aws_ecs_service" "task_todo" {
   depends_on = [
     aws_lb_listener.lb_listener_https
   ]
+}
+
+resource "random_id" "suffix" {
+  byte_length = 4
 }
