@@ -1,10 +1,6 @@
-resource "aws_route53_zone" "main" {
-  name = "trustcompras.com.br"
-}
-
 resource "aws_route53_record" "app" {
   zone_id = aws_route53_zone.main.zone_id
-  name    = "banco-todo.trustcompras.com.br"
+  name    = "banco.trustcompras.com.br"
   type    = "A"
 
   alias {
