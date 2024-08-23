@@ -34,8 +34,11 @@ jobs:
     - name: Initialize Terraform
       run: terraform init
 
-    - name: Destroy existing infrastructure
-      run: terraform destroy -auto-approve -var "aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}" -var "ecr_uri=${{ secrets.ECR_URI }}"
+    - name: Destroy ECS resources
+      run: |
+        terraform destroy -target=aws_ecs_service.service_todo -auto-approve
+        terraform destroy -target=aws_ecs_task_definition.task_todo -auto-approve
+        terraform destroy -target=aws_ecs_cluster.cluster_todo -auto-approve
 
     - name: Apply Terraform
       run: terraform apply -auto-approve -var "aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}" -var "ecr_uri=${{ secrets.ECR_URI }}"
