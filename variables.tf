@@ -43,11 +43,16 @@ variable "sg1" {
 }
 
 variable "aws_account_id" {
-  description = "AWS Account ID"
+  description = "Secret Github com o AWS Account ID"
   type        = string
 }
 
 variable "ecr_uri" {
-  description = "URI do repositório ECR"
+  description = "Secret Github com o URI do repositório ECR"
+  type        = string
+}
+
+variable "bucket_name" {
+  description = "Secret Github com o nome do bucket"
   type        = string
 }

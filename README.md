@@ -16,6 +16,7 @@ Este repositório contém a configuração do Terraform para provisionar uma inf
 - `task.tf`: Configuração da definição de tarefa e serviço ECS.
 - `variables.tf`: Definição das variáveis usadas no Terraform.
 - `vpc.tf`: Configuração da VPC e do Internet Gateway.
+- `route53.tf`: Criação da Entrada DNS.
 
 ## Pré-requisitos
 
@@ -24,7 +25,7 @@ Este repositório contém a configuração do Terraform para provisionar uma inf
 - Configuração das credenciais AWS no GitHub Secrets:
   - `AWS_ACCESS_KEY_ID`
   - `AWS_SECRET_ACCESS_KEY`
-
+ .
 ## Configuração do Workflow do GitHub Actions
 
 O workflow do GitHub Actions (`.github/workflows/deployECS.yml`) automatiza a execução do Terraform para validar e aplicar as mudanças na infraestrutura.
@@ -44,11 +45,11 @@ O workflow do GitHub Actions (`.github/workflows/deployECS.yml`) automatiza a ex
 
 1. Clone o repositório:
    ```sh
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/sniperpsp/cicd-ecs-site.git
    cd seu-repositorio
    ```
 
-2. Configure suas variáveis no arquivo `variables.tf` conforme necessário.
+2. Configure suas variáveis no arquivo `variables.tf` conforme necessário algumas das variaveis são secrets do github.
 
 3. Inicialize o Terraform:
    ```sh

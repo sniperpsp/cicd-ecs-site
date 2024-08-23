@@ -11,7 +11,7 @@ terraform {
 
 terraform {
   backend "s3" {
-    bucket = "bucket-teste124"
+    bucket = "${var.bucket_name}"
     key    = "ecs-todo/terraform.tfstate"
     region = "us-east-1"
   }
