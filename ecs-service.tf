@@ -18,6 +18,6 @@ resource "aws_ecs_service" "service_todo" {
   }
 
   depends_on = [
-    aws_lb_listener.lb_listener
+    aws_lb_listener.lb_listener_https
   ]
 }
