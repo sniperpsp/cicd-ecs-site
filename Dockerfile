@@ -1,23 +1,22 @@
-# Use a imagem oficial do Node.js como a base
+# Dockerfile
 FROM node:14
 
-# Defina o diretório de trabalho
+# Diretório de trabalho
 WORKDIR /usr/src/app
 
-# Copie o package.json e o package-lock.json
+# Copiar arquivos
 COPY package*.json ./
+COPY . .
 
-RUN npm config set strict-ssl false
-
-
-# Instale as dependências
+# Instalar dependências
 RUN npm install
 
-# Copie o restante do código da aplicação
-COPY site .
+# Adicionar o script de atualização de DNS
+COPY update_dns.sh /usr/src/app/update_dns.sh
+RUN chmod +x /usr/src/app/update_dns.sh
 
-# Exponha a porta da aplicação
+# Expor a porta
 EXPOSE 8080
 
-# Comando para rodar a aplicação
-CMD ["node", "index.js"]
+# Comando para iniciar a aplicação
+CMD ["sh", "-c", "./update_dns.sh && npm start"]
