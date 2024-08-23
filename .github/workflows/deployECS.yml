@@ -107,6 +107,9 @@ jobs:
         terraform init
         terraform apply -auto-approve -var "aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}" -var "ecr_uri=${{ secrets.ECR_URI }}"
 
+    - name: Update DNS with Task IP #Atualizando o dns com o ip do container/task
+      run: ./update_dns.sh
+
   destroy:
     name: Destroy Infrastructure
     runs-on: ubuntu-latest
