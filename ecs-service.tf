@@ -1,5 +1,5 @@
 resource "aws_ecs_service" "service_todo" {
-  name            = "service-todo"
+  name            = "service-todo-${timestamp()}"
   cluster         = aws_ecs_cluster.cluster_todo.id
   task_definition = aws_ecs_task_definition.task_todo.arn
   desired_count   = 1
