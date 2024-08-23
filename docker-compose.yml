@@ -16,7 +16,7 @@ services:
     depends_on:
       - db
     environment:
-      PGHOST: db
+      PGHOST: banco-de-dados
       PGUSER: postgres
       PGPASSWORD: postgres
       PGDATABASE: postgres
