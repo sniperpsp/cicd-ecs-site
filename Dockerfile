@@ -11,10 +11,6 @@ COPY . .
 # Instalar dependências
 RUN npm install
 
-# Adicionar o script de atualização de DNS
-COPY update_dns.sh /usr/src/app/update_dns.sh
-RUN chmod +x /usr/src/app/update_dns.sh
-
 # Expor a porta
 EXPOSE 8080
 
