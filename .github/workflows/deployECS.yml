@@ -126,4 +126,4 @@ jobs:
     - name: Destroy ECS and ECR
       run: |
         terraform init
-        terraform destroy -auto-approve -var "aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}" -var "ecr_uri=${{ secrets.ECR_URI }}"
+        terraform destroy -auto-approve -var "aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}" -var "ecr_uri=${{ secrets.ECR_URI }}" 
