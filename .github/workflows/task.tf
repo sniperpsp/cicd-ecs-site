@@ -9,8 +9,8 @@ resource "aws_ecs_task_definition" "todo" {
     container_definitions = jsonencode([
     {
         name   = "node-todo",
-        image = "nginx:latest"
-        #image  = aws_ecr_repository.node_todo.repository_url,
+        #image = "nginx:latest"
+        image  = aws_ecr_repository.node_todo.repository_url,
         cpu     =   256,
         memory  =   512,
         essential   = true,
@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "todo" {
 
 resource "aws_ecs_service" "todo_service" {
     name =  "node_todo"
-    cluster = aws_ecs_cluster.cluster-todo.id
+    cluster = aws_ecs_cluster.cluster_todo.id
     task_definition = aws_ecs_task_definition.todo.arn
     desired_count = 1
     launch_type = "FARGATE"
@@ -50,7 +50,7 @@ resource "aws_ecs_service" "todo_service" {
     }
 
     depends_on = [ 
-        aws_ecs_cluster.cluster-todo 
+        aws_ecs_cluster.cluster_todo,
         aws_ecr_repository.node_todo,
         aws_lb.lb_todo,
 

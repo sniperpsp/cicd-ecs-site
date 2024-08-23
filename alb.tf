@@ -1,4 +1,4 @@
-resource "aws_lb_target_group" "node-todo" {
+resource "aws_lb_target_group" "node_todo" {
   name = "albtodo"
   port = 80
   protocol = "HTTP"
@@ -7,7 +7,6 @@ resource "aws_lb_target_group" "node-todo" {
   target_type = "ip"
 
   health_check {
-    
     enabled  = true
     path    = "/"
     protocol = "HTTP"
@@ -24,13 +23,13 @@ resource "aws_lb_target_group" "node-todo" {
     Servico= var.tag_servico
   }
 }
+
 resource "aws_lb" "lb_todo" {
   name  = "lbtodo"
   internal  = false
   load_balancer_type = "application"
-  subnets = [aws_subnet.subnet1.id,aws_subnet.subnet2.id]
+  subnets = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
   security_groups = [aws_security_group.SG1.id]
-  
 }
 
 resource "aws_lb_listener" "lb_listener" {
@@ -40,7 +39,6 @@ resource "aws_lb_listener" "lb_listener" {
 
   default_action {
     type = "forward"
-    target_group_arn = aws_lb_target_group.node-todo.arn
+    target_group_arn = aws_lb_target_group.node_todo.arn
   }
-
 }
