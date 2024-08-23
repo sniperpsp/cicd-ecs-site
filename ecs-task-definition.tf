@@ -1,8 +1,3 @@
-variable "aws_account_id" {}
-variable "ecr_uri" {}
-
-data "aws_caller_identity" "current" {}
-
 resource "aws_ecs_task_definition" "task_todo" {
   family                   = "task-todo"
   network_mode             = "awsvpc"
@@ -62,7 +57,7 @@ resource "aws_ecs_task_definition" "task_todo" {
   ])
 }
 
-resource "aws_ecs_service" "service_todo" {
+resource "aws_ecs_service" "task_todo" {
   name            = "service-todo"
   cluster         = aws_ecs_cluster.cluster_todo.id
   task_definition = aws_ecs_task_definition.task_todo.arn
