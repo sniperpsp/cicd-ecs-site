@@ -6,7 +6,7 @@ resource "aws_ecs_task_definition" "todo" {
     requires_compatibilities = ["FARGATE"]
     execution_role_arn = "arn:aws:iam::730335588602:role/role-acesso-ssm"
 
-    container_definitions = jsondecode([
+    container_definitions = jsonencode([
     {
         name   = "node-todo",
         image = "nginx:latest"
@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "todo" {
 
 resource "aws_ecs_service" "todo_service" {
     name =  "node_todo"
-    cluster = aws_ecs_cluster.cluster.id
+    cluster = aws_ecs_cluster.cluster-todo.id
     task_definition = aws_ecs_task_definition.todo.arn
     desired_count = 1
     launch_type = "FARGATE"
