@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'docker-compose.yml'
-      - 'Dockerfile'
-      - 'Dockerfile-postgres'
-      - 'init-db.sh'
   workflow_dispatch:
     inputs:
       destroy:
