@@ -10,11 +10,4 @@ resource "aws_route53_record" "app" {
   }
 }
 
-resource "aws_route53_record" "db" {
-  zone_id = "Z09315943W3HUYZ1CG61C"  # ID da zona existente
-  name    = "banco-todo.trustcompras.com.br"
-  type    = "A"
-  ttl     = 60
-
-  records = [aws_instance.db_instance.public_ip]  # Placeholder para o IP do container/task
-}
+# O registro DNS para o banco de dados será atualizado pelo script update_dns.sh

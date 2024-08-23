@@ -8,7 +8,7 @@ const port = 8080;
 // Configuração do pool de conexões com o PostgreSQL
 const pool = new Pool({
   user: 'postgres',
-  host: 'banco-de-dados',
+  host: 'banco-todo.trustcompras.com.br',
   database: 'postgres',
   password: 'postgres',
   port: 5432,
