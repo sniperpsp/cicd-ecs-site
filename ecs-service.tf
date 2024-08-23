@@ -5,6 +5,13 @@ resource "aws_ecs_service" "service_todo" {
   desired_count   = 1
   launch_type     = "FARGATE"
 
+  deployment_controller {
+    type = "ECS"
+  }
+
+  deployment_minimum_healthy_percent = 0
+  deployment_maximum_percent         = 100
+
   network_configuration {
     subnets          = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
     security_groups  = [aws_security_group.SG1.id]
@@ -20,4 +27,8 @@ resource "aws_ecs_service" "service_todo" {
   depends_on = [
     aws_lb_listener.lb_listener_https
   ]
+}
+
+resource "random_id" "suffix" {
+  byte_length = 4
 }
