@@ -15,7 +15,7 @@ resource "aws_ecs_task_definition" "task_todo" {
       portMappings = [
         {
           containerPort = 8080
-          hostPort      = 0
+          hostPort      = 8080
           protocol      = "tcp"
         }
       ]

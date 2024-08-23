@@ -16,8 +16,8 @@ resource "aws_lb" "app_lb" {
 
 resource "aws_lb_target_group" "node_todo" {
   name     = "albtodo"
-  port     = 443
-  protocol = "HTTPS"
+  port     = 8080
+  protocol = "HTTP"
   vpc_id   = aws_vpc.vpc2.id
 
   target_type = "ip"
@@ -25,7 +25,7 @@ resource "aws_lb_target_group" "node_todo" {
   health_check {
     enabled             = true
     path                = "/"
-    protocol            = "HTTPS"
+    protocol            = "HTTP"
     matcher             = "200-299"
     interval            = 30
     timeout             = 5
@@ -40,10 +40,12 @@ resource "aws_lb_target_group" "node_todo" {
   }
 }
 
-resource "aws_lb_listener" "lb_listener" {
+resource "aws_lb_listener" "lb_listener_https" {
   load_balancer_arn = aws_lb.app_lb.arn
   port              = 443
-  protocol          = "HTTP"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "arn:aws:acm:us-east-1:730335588602:certificate/49375b4a-4966-4d12-84c3-d17869bb4488"
 
   default_action {
     type             = "forward"
