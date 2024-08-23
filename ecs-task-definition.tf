@@ -22,7 +22,7 @@ resource "aws_ecs_task_definition" "task_todo" {
       environment = [
         {
           name  = "PGHOST"
-          value = "banco-de-dados"  # Use o nome do serviço do banco de dados
+          value = "banco-todo.trustcompras.com.br"  # Use o nome do serviço do banco de dados
         },
         {
           name  = "PGUSER"
