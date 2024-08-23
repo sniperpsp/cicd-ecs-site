@@ -22,7 +22,7 @@ resource "aws_ecs_task_definition" "task_todo" {
       environment = [
         {
           name  = "PGHOST"
-          value = "banco-de-dados"
+          value = "banco-de-dados"  # Use o nome do serviço do banco de dados
         },
         {
           name  = "PGUSER"
@@ -39,6 +39,10 @@ resource "aws_ecs_task_definition" "task_todo" {
         {
           name  = "PGPORT"
           value = "5432"
+        },
+        {
+          name  = "DEPLOYMENT_TIME"
+          value = timestamp()  # Adiciona um timestamp para forçar a criação de uma nova versão da tarefa
         }
       ]
     },

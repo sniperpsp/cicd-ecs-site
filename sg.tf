@@ -1,5 +1,3 @@
-#Criação do Security Groupe para a EC2 =)
-
 resource "aws_security_group" "SG1" {
   name        = "${var.sg1}-EC2"
   description = "Security Group para minha aplicacao"
@@ -11,7 +9,6 @@ resource "aws_security_group" "SG1" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-
   }
   ingress {
     from_port   = 443
@@ -19,15 +16,18 @@ resource "aws_security_group" "SG1" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   ingress {
     from_port = 0
     to_port = 0
     protocol = "-1"
     cidr_blocks = ["${var.meu_ip}/24"]  # Usando a variável meu_ip para o seu IP
   }
-
-    // Permitir que o próprio SG se comunique consigo mesmo
   ingress {
     from_port   = 0
     to_port     = 0
@@ -44,10 +44,8 @@ resource "aws_security_group" "SG1" {
   }
 
   tags = {
-    
-    Name = var.tag_name
-    App = var.tag_app
+    Name    = var.tag_name
+    App     = var.tag_app
     Servico = var.tag_servico
-
   }
 }
