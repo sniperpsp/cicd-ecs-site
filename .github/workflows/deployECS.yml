@@ -49,9 +49,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: List files
-      run: ls -la
-
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
 
@@ -69,9 +66,6 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: List files before Docker build
-      run: ls -la
-
     - name: Build and push app image
       id: build-app
       uses: docker/build-push-action@v2
@@ -79,7 +73,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.ECR_URI }}/node-todo-app:latest
+        tags: ${{ secrets.ECR_URI }}/node-todo:latest
 
     #- name: Build and push db image
     #  id: build-db
@@ -109,8 +103,10 @@ jobs:
 
     - name: Deploy to ECS
       run: |
-        terraform init
-        terraform apply -auto-approve
+        aws ecs update-service --cluster cluster-todo --service node-todo --force-new-deploy
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
   destroy:
     name: Destroy Infrastructure
@@ -132,3 +128,4 @@ jobs:
       run: |
         terraform init
         terraform destroy -auto-approve
+

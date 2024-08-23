@@ -1,19 +1,14 @@
-resource "aws_ecr_repository" "node_todo_app" {
-  name                 = "node-todo-app"
+resource "aws_ecr_repository" "node_todo" {
+  name                 = "node-todo"
   image_tag_mutability = "MUTABLE"
   force_delete         = true
 
   image_scanning_configuration {
     scan_on_push = false
+  
   }
 }
 
-resource "aws_ecr_repository" "postgres_db" {
-  name                 = "postgres-db"
-  image_tag_mutability = "MUTABLE"
-  force_delete         = true
-
-  image_scanning_configuration {
-    scan_on_push = false
+  output "aws_ecr_repository_url" {
+    value = aws_ecr_repository.node_todo.repository_url
   }
-}

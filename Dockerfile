@@ -7,5 +7,5 @@ RUN apt install nano -y
 RUN apt install curl -y
 RUN apt install git -y
 RUN npm install -g create-react-app
-EXPOSE 3000
+EXPOSE 80
 CMD ["sh", "-c", "npm install && npm start"]
