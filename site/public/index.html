@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Anotações</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .tasks {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .task {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: relative;
+        }
+        .task input[type="checkbox"] {
+            margin-top: 10px;
+        }
+        .pending {
+            background-color: red;
+        }
+        .completed {
+            background-color: green;
+        }
+        .filters {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .filters button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .filters button:hover {
+            background-color: #0056b3;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        .warning {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Agenda de Anotações</h1>
+    <form id="taskForm">
+        <input type="text" id="taskInput" placeholder="Digite a tarefa">
+        <button type="submit">Adicionar Tarefa</button>
+    </form>
+    <div class="warning" id="warning"></div>
+    <div class="tasks" id="tasks"></div>
+    <div class="filters">
+        <button onclick="filterTasks('1 day')">Último 1 Dia</button>
+        <button onclick="filterTasks('5 days')">Últimos 5 Dias</button>
+        <button onclick="filterTasks('10 days')">Últimos 10 Dias</button>
+        <button onclick="deleteSelectedTasks()">Deletar Tarefas Selecionadas</button>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

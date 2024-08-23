@@ -1,7 +1,7 @@
 FROM postgres:latest
 
 # Copia o script de inicialização para o container
-COPY ./init-db.sh /docker-entrypoint-initdb.d/
+COPY init-db.sh /docker-entrypoint-initdb.d/
 
 # Define as variáveis de ambiente para o PostgreSQL
 ENV POSTGRES_USER=postgres
