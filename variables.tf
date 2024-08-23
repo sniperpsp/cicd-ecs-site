@@ -51,8 +51,3 @@ variable "ecr_uri" {
   description = "Secret Github com o URI do repositório ECR"
   type        = string
 }
-
-variable "bucket_name" {
-  description = "Secret Github com o nome do bucket"
-  type        = string
-}
