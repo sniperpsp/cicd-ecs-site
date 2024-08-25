@@ -1,6 +1,6 @@
 resource "aws_route53_record" "app" {
   zone_id = "Z09315943W3HUYZ1CG61C"  # ID da zona existente
-  name    = "app-todo.trustcompras.com.br"
+  name    = "gpt.trustcompras.com.br"
   type    = "A"
 
   alias {
